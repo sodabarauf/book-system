@@ -1,13 +1,12 @@
-// controllers/bookController.js
-const Book = require("../models/bookModel");
+const Book = require('../models/bookModel');
 
 // Fetch all books
 exports.getAllBooks = async (req, res) => {
   try {
     const books = await Book.find();
-    res.json(books);
+    return res.json(books); // Return the response
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message }); // Return the error response
   }
 };
 
@@ -16,11 +15,11 @@ exports.getBookById = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
     if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+      return res.status(404).json({ message: 'Book not found' });
     }
-    res.json(book);
+    return res.json(book); // Return the response
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message }); // Return the error response
   }
 };
 
@@ -28,9 +27,9 @@ exports.getBookById = async (req, res) => {
 exports.createBook = async (req, res) => {
   try {
     const newBook = await Book.create(req.body);
-    res.status(201).json(newBook);
+    return res.status(201).json(newBook); // Return the response
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message }); // Return the error response
   }
 };
 
@@ -42,11 +41,11 @@ exports.updateBook = async (req, res) => {
       runValidators: true,
     });
     if (!updatedBook) {
-      return res.status(404).json({ message: "Book not found" });
+      return res.status(404).json({ message: 'Book not found' });
     }
-    res.json(updatedBook);
+    return res.json(updatedBook); // Return the response
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message }); // Return the error response
   }
 };
 
@@ -55,10 +54,10 @@ exports.deleteBook = async (req, res) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.id);
     if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+      return res.status(404).json({ message: 'Book not found' });
     }
-    res.status(204).json({ message: "Book deleted" });
+    return res.status(204).json({ message: 'Book deleted' }); // Return the response
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message }); // Return the error response
   }
 };

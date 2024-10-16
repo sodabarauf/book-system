@@ -1,9 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const cors = require('cors'); // Moved cors import above db
 const helmet = require('helmet');
 const morgan = require('morgan');
-const cors = require('cors');
+const connectDB = require('./config/db'); // Moved db import below cors
 
 // Load environment variables
 dotenv.config();
@@ -24,7 +24,7 @@ app.use(express.static('public'));
 
 // Import routes
 const bookRoutes = require('./routes/bookRoutes');
-app.use("/api/books", bookRoutes);
+app.use('/api/books', bookRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
