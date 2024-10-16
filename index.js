@@ -23,8 +23,8 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Import routes
-
 const bookRoutes = require('./routes/bookRoutes');
+
 app.use('/api/books', bookRoutes);
 
 // Basic route
