@@ -23,6 +23,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Import routes
+
 const bookRoutes = require('./routes/bookRoutes');
 app.use('/api/books', bookRoutes);
 
@@ -57,6 +58,7 @@ app.use((err, req, res, next) => {
     status: 'error',
     message: err.message,
   });
+  next(err);
 });
 
 // Start the server
